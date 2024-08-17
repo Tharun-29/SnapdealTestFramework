@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="8" passed="8" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-08-17T22:34:20 IST" name="Suite" finished-at="2024-08-17T22:36:15 IST" duration-ms="114363">
+    <groups>
+    </groups>
+    <test started-at="2024-08-17T22:34:20 IST" name="Snapdeal Tests" finished-at="2024-08-17T22:36:15 IST" duration-ms="114363">
+      <class name="snapdeal_automation.snapdeal_automation_suite.PriceFilterTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.PriceFilterTest@7b94089b]" started-at="2024-08-17T22:35:13 IST" name="setup" finished-at="2024-08-17T22:35:16 IST" duration-ms="2330" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="verifyPriceFilterFunctionality()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.PriceFilterTest@7b94089b]" started-at="2024-08-17T22:35:16 IST" name="verifyPriceFilterFunctionality" finished-at="2024-08-17T22:35:21 IST" duration-ms="4753" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyPriceFilterFunctionality -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.PriceFilterTest@7b94089b]" started-at="2024-08-17T22:35:21 IST" name="tearDown" finished-at="2024-08-17T22:35:26 IST" duration-ms="5272" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- snapdeal_automation.snapdeal_automation_suite.PriceFilterTest -->
+      <class name="snapdeal_automation.snapdeal_automation_suite.AddToCartTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.AddToCartTest@47f9738]" started-at="2024-08-17T22:35:36 IST" name="setup" finished-at="2024-08-17T22:35:38 IST" duration-ms="2079" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="verifyAddToCartFunctionality()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.AddToCartTest@47f9738]" started-at="2024-08-17T22:35:38 IST" name="verifyAddToCartFunctionality" finished-at="2024-08-17T22:35:47 IST" duration-ms="8752" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyAddToCartFunctionality -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.AddToCartTest@47f9738]" started-at="2024-08-17T22:35:47 IST" name="tearDown" finished-at="2024-08-17T22:35:54 IST" duration-ms="6973" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- snapdeal_automation.snapdeal_automation_suite.AddToCartTest -->
+      <class name="snapdeal_automation.snapdeal_automation_suite.ProductSortingTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.ProductSortingTest@71812481]" started-at="2024-08-17T22:34:32 IST" name="setup" finished-at="2024-08-17T22:34:35 IST" duration-ms="2103" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="verifySortingByPriceHighToLow()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.ProductSortingTest@71812481]" started-at="2024-08-17T22:34:35 IST" name="verifySortingByPriceHighToLow" description="Sorting Test" finished-at="2024-08-17T22:34:39 IST" duration-ms="4341" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifySortingByPriceHighToLow -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.ProductSortingTest@71812481]" started-at="2024-08-17T22:34:39 IST" name="tearDown" finished-at="2024-08-17T22:34:46 IST" duration-ms="6896" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.ProductSortingTest@71812481]" started-at="2024-08-17T22:34:46 IST" name="setup" finished-at="2024-08-17T22:34:48 IST" duration-ms="2077" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="verifySortingByPriceLowToHigh()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.ProductSortingTest@71812481]" started-at="2024-08-17T22:34:48 IST" name="verifySortingByPriceLowToHigh" finished-at="2024-08-17T22:34:53 IST" duration-ms="4542" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifySortingByPriceLowToHigh -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.ProductSortingTest@71812481]" started-at="2024-08-17T22:34:53 IST" name="tearDown" finished-at="2024-08-17T22:34:58 IST" duration-ms="5251" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- snapdeal_automation.snapdeal_automation_suite.ProductSortingTest -->
+      <class name="snapdeal_automation.snapdeal_automation_suite.ProductImageDisplayTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.ProductImageDisplayTest@7ca20101]" started-at="2024-08-17T22:35:26 IST" name="setup" finished-at="2024-08-17T22:35:28 IST" duration-ms="2321" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="verifyProductImage()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.ProductImageDisplayTest@7ca20101]" started-at="2024-08-17T22:35:28 IST" name="verifyProductImage" finished-at="2024-08-17T22:35:31 IST" duration-ms="2280" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyProductImage -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.ProductImageDisplayTest@7ca20101]" started-at="2024-08-17T22:35:31 IST" name="tearDown" finished-at="2024-08-17T22:35:36 IST" duration-ms="5242" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- snapdeal_automation.snapdeal_automation_suite.ProductImageDisplayTest -->
+      <class name="snapdeal_automation.snapdeal_automation_suite.ProductSearchTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.ProductSearchTest@65a15628]" started-at="2024-08-17T22:34:21 IST" name="setup" finished-at="2024-08-17T22:34:25 IST" duration-ms="4179" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="productSearch()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.ProductSearchTest@65a15628]" started-at="2024-08-17T22:34:25 IST" name="productSearch" finished-at="2024-08-17T22:34:27 IST" duration-ms="2264" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- productSearch -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.ProductSearchTest@65a15628]" started-at="2024-08-17T22:34:27 IST" name="tearDown" finished-at="2024-08-17T22:34:32 IST" duration-ms="5277" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- snapdeal_automation.snapdeal_automation_suite.ProductSearchTest -->
+      <class name="snapdeal_automation.snapdeal_automation_suite.BrandFilterTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.BrandFilterTest@16ce702d]" started-at="2024-08-17T22:34:58 IST" name="setup" finished-at="2024-08-17T22:35:00 IST" duration-ms="2113" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="verifyBrandFilterFunctionality()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.BrandFilterTest@16ce702d]" started-at="2024-08-17T22:35:00 IST" name="verifyBrandFilterFunctionality" finished-at="2024-08-17T22:35:08 IST" duration-ms="7705" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyBrandFilterFunctionality -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.BrandFilterTest@16ce702d]" started-at="2024-08-17T22:35:08 IST" name="tearDown" finished-at="2024-08-17T22:35:13 IST" duration-ms="5343" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- snapdeal_automation.snapdeal_automation_suite.BrandFilterTest -->
+      <class name="snapdeal_automation.snapdeal_automation_suite.RemoveFromCartTest">
+        <test-method is-config="true" signature="setup()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.RemoveFromCartTest@6155d082]" started-at="2024-08-17T22:35:54 IST" name="setup" finished-at="2024-08-17T22:35:56 IST" duration-ms="2246" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="verifyRemoveFromCartFunctionality()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.RemoveFromCartTest@6155d082]" started-at="2024-08-17T22:35:56 IST" name="verifyRemoveFromCartFunctionality" finished-at="2024-08-17T22:36:09 IST" duration-ms="12990" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyRemoveFromCartFunctionality -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:snapdeal_automation.snapdeal_automation_suite.RemoveFromCartTest@6155d082]" started-at="2024-08-17T22:36:09 IST" name="tearDown" finished-at="2024-08-17T22:36:15 IST" duration-ms="5412" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- snapdeal_automation.snapdeal_automation_suite.RemoveFromCartTest -->
+    </test> <!-- Snapdeal Tests -->
+  </suite> <!-- Suite -->
+</testng-results>

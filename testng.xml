@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+
+	<!-- Listeners Section (Optional) -->
+	<listeners>
+		<listener class-name="TestComponents.TestListener" />
+	</listeners>
+
+	<test thread-count="5" name="Snapdeal Tests">
+		<classes>
+			<class
+				name="snapdeal_automation.snapdeal_automation_suite.ProductSearchTest" />
+			<class
+				name="snapdeal_automation.snapdeal_automation_suite.ProductSortingTest" />
+			<class
+				name="snapdeal_automation.snapdeal_automation_suite.BrandFilterTest" />
+			<class
+				name="snapdeal_automation.snapdeal_automation_suite.PriceFilterTest" />
+			<class
+				name="snapdeal_automation.snapdeal_automation_suite.ProductImageDisplayTest" />
+			<class
+				name="snapdeal_automation.snapdeal_automation_suite.AddToCartTest" />
+			<class
+				name="snapdeal_automation.snapdeal_automation_suite.RemoveFromCartTest" />
+
+		</classes>
+	</test> <!--
+	Test -->
+</suite> <!--
+Suite -->
