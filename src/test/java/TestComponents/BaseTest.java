@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -47,7 +48,10 @@ public class BaseTest {
 			driver = new ChromeDriver(opt);
 		} else if (browser.contains("firefox")) {
 			WebDriverManager.firefoxdriver().setup();
-			driver = new FirefoxDriver();
+            FirefoxOptions options = new FirefoxOptions();
+            options.setAcceptInsecureCerts(true);
+            driver = new FirefoxDriver(options);
+            driver.manage().window().maximize(); // Maximize Firefox window
 		}
 
 		int implicitWait = Integer.parseInt(configReader.getProperty("implicitWait"));
