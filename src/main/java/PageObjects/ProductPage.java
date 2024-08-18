@@ -13,201 +13,156 @@ import utilities.WaitHelper;
 
 public class ProductPage {
 
-	public WebDriver driver;
+    private WebDriver driver;
 
-	public ProductPage(WebDriver driver) {
-		this.driver = driver;
-		PageFactory.initElements(driver, this);
-	}
+    public ProductPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
 
-	@FindBy(xpath = "//img[contains(@class,'product-image')]")
-	List<WebElement> productImages;
+    @FindBy(xpath = "//img[contains(@class,'product-image')]")
+    private List<WebElement> productImages;
 
-	@FindBy(xpath = "(//div[contains(@class,'product-tuple-listing')])")
-	List<WebElement> productResults;
+    @FindBy(xpath = "(//div[contains(@class,'product-tuple-listing')])")
+    private List<WebElement> productResults;
 
-	@FindBy(xpath = "//div[contains(@class, 'sort-selected')]")
-	WebElement sortByDropdown;
+    @FindBy(xpath = "//div[contains(@class, 'sort-selected')]")
+    private WebElement sortByDropdown;
 
-	@FindBy(xpath = "//span[@class='lfloat product-price']")
-	List<WebElement> productPrices;
+    @FindBy(xpath = "//span[@class='lfloat product-price']")
+    private List<WebElement> productPrices;
 
-	@FindBy(id = "add-cart-button-id")
-	WebElement addToCartButton;
+    @FindBy(id = "add-cart-button-id")
+    private WebElement addToCartButton;
 
-	@FindBy(className = "mess-text")
-	WebElement cartMessage;
+    @FindBy(className = "mess-text")
+    private WebElement cartMessage;
 
-	@FindBy(xpath = "//div[text()='View Cart']")
-	WebElement viewCartButton;
+    @FindBy(xpath = "//div[text()='View Cart']")
+    private WebElement viewCartButton;
 
-	@FindBy(xpath = "//span[contains(.,'REMOVE')]")
-	WebElement removeFromCartButton;
+    @FindBy(xpath = "//span[contains(.,'REMOVE')]")
+    private WebElement removeFromCartButton;
 
-	@FindBy(xpath = "//div[@class='cart-heading clearfix']//h3[1]")
-	WebElement emptyCartMessage;
+    @FindBy(xpath = "//div[@class='cart-heading clearfix']//h3[1]")
+    private WebElement emptyCartMessage;
 
-	@FindBy(xpath = "//input[@name='fromVal']")
-	WebElement minPriceInput;
+    @FindBy(xpath = "//input[@name='fromVal']")
+    private WebElement minPriceInput;
 
-	@FindBy(xpath = "//input[@name='toVal']")
-	WebElement maxPriceInput;
+    @FindBy(xpath = "//input[@name='toVal']")
+    private WebElement maxPriceInput;
 
-	@FindBy(xpath = "//div[contains(@class,'price-go-arrow')]")
-	WebElement goButton;
+    @FindBy(xpath = "//div[contains(@class,'price-go-arrow')]")
+    private WebElement goButton;
 
-	@FindBy(xpath = "//input[@data-filtername='Brand']")
-	WebElement productBrandSearch;
+    @FindBy(xpath = "//input[@data-filtername='Brand']")
+    private WebElement productBrandSearch;
 
-	@FindBy(xpath = "(//input[@data-name='filterSearch-Brand'])[1]")
-	WebElement productBrandSearchInput;
+    @FindBy(xpath = "(//input[@data-name='filterSearch-Brand'])[1]")
+    private WebElement productBrandSearchInput;
 
-	@FindBy(xpath = "//div[text()='APPLY']")
-	WebElement brandFilterApplyButton;
+    @FindBy(xpath = "//div[text()='APPLY']")
+    private WebElement brandFilterApplyButton;
 
-	public void selectSortOption(String option) {
-		sortByDropdown.click();
+    // Select sorting option
+    public void selectSortOption(String option) {
+        sortByDropdown.click();
+        WebElement sortOption = driver.findElement(By.xpath("//li[contains(.,'" + option + "')]"));
+        sortOption.click();
+        WaitHelper.staticWait(2); // Wait for dropdown to update
+    }
 
-		WebElement sortOption = driver.findElement(By.xpath("//li[contains(.,'" + option + "')]"));
-		sortOption.click();
+    // Get product prices from the page
+    public List<Double> getProductPrices() {
+        List<Double> prices = new ArrayList<>();
+        for (WebElement priceElement : productPrices) {
+            String priceText = priceElement.getText().trim();
+            String numericPrice = priceText.replaceAll("[^\\d]", "");
+            if (!numericPrice.isEmpty()) {
+                prices.add(Double.parseDouble(numericPrice));
+            }
+        }
+        return prices;
+    }
 
-		// Add static wait before interacting with the dropdown
-		WaitHelper.staticWait(2); // Wait for 2 seconds
-	}
+    // Verify if prices are sorted in ascending order
+    public boolean verifyPriceSortedAscending() {
+        List<Double> prices = getProductPrices();
+        if (prices.isEmpty()) return false;
+        return prices.get(0) <= prices.get(prices.size() - 1);
+    }
 
-	public List<Double> getProductPrices() {
-		List<Double> prices = new ArrayList<>();
-		for (WebElement priceElement : productPrices) {
-			String priceText = priceElement.getText().trim(); // Using getText() to retrieve the price text
+    // Verify if prices are sorted in descending order
+    public boolean verifyPriceSortedDescending() {
+        List<Double> prices = getProductPrices();
+        if (prices.isEmpty()) return false;
+        return prices.get(0) >= prices.get(prices.size() - 1);
+    }
 
-			// Remove any non-numeric characters, such as commas or currency symbols
-			String numericPrice = priceText.replaceAll("[^\\d]", "");
-			if (!numericPrice.isEmpty()) {
-				prices.add(Double.parseDouble(numericPrice));
-			} else {
-				System.out.println("Unable to parse price: " + priceText);
-			}
-		}
+    // Check if the number of product images matches the number of products
+    public boolean validateAllProductImagesDisplayed() {
+        return productResults.size() == productImages.size();
+    }
 
-		return prices;
-	}
+    // Add the product to the cart
+    public void addToCart() {
+        addToCartButton.click();
+        WaitHelper.staticWait(2); // Wait for the product to be added
+    }
 
-	public boolean verifyPriceSortedAscending() {
-		List<Double> prices = getProductPrices();
-		if (prices.isEmpty()) {
-			return false; // Handle empty list case
+    // Check if the product has been added to the cart
+    public boolean isProductAddedToCart() {
+        WaitHelper.staticWait(2); // Wait for cart message update
+        return cartMessage.getText().trim().contains("added to your cart");
+    }
 
-		}
+    // Remove the product from the cart
+    public void removeFromCart() {
+        viewCartButton.click();
+        WaitHelper.staticWait(2); // Wait for cart page to load
+        removeFromCartButton.click();
+    }
 
-		Double firstPrice = prices.get(0);
-		Double lastPrice = prices.get(prices.size() - 1);
+    // Verify if the product has been removed from the cart
+    public String isProductRemovedFromCart() {
+        WaitHelper.staticWait(2); // Wait for cart update
+        return emptyCartMessage.getText();
+    }
 
-		return firstPrice <= lastPrice;
-	}
+    // Apply price filter
+    public void applyPriceFilter(String minPrice, String maxPrice) {
+        minPriceInput.clear();
+        minPriceInput.sendKeys(minPrice);
+        maxPriceInput.clear();
+        maxPriceInput.sendKeys(maxPrice);
+        goButton.click();
+        WaitHelper.staticWait(2); // Wait for filter to apply
+    }
 
-	public boolean verifyPriceSortedDescending() {
-		List<Double> prices = getProductPrices();
-		if (prices.isEmpty()) {
-			return false; // Handle empty list case
-		}
+    // Verify if all prices are within the specified range
+    public boolean verifyPricesInRange(double minPrice, double maxPrice) {
+        List<Double> prices = getProductPrices();
+        for (Double price : prices) {
+            if (price < minPrice || price > maxPrice) return false;
+        }
+        return true;
+    }
 
-		Double firstPrice = prices.get(0);
-		Double lastPrice = prices.get(prices.size() - 1);
+    // Apply brand filter
+    public void applyBrandFilter(String brandName) {
+        productBrandSearch.click();
+        WaitHelper.staticWait(3); // Wait for filter options to load
+        productBrandSearchInput.sendKeys(brandName);
+        WebElement brandFilterCheckbox = driver.findElement(By.xpath("//label[@for='Brand-" + brandName + "']"));
+        WaitHelper.staticWait(2); // Wait for checkbox to be clickable
+        brandFilterCheckbox.click();
+        brandFilterApplyButton.click();
+    }
 
-		return firstPrice >= lastPrice;
-	}
-
-	public boolean validateAllProductImagesDisplayed() {
-
-		if (productResults.size() != productImages.size()) {
-			return false;
-		}
-		return true;
-	}
-
-	public void addToCart() {
-		// Step 1: Locate the "Add to Cart" button and click it
-		addToCartButton.click();
-
-		// Step 2: Optionally, you can add a wait to ensure the product is added to the
-		// cart
-		WaitHelper.staticWait(2); // Wait for 2 seconds for the action to complete
-	}
-
-	public boolean isProductAddedToCart() {
-		// Wait for the cart count or success message to be updated
-		WaitHelper.staticWait(2); // Adjust the wait time as needed
-
-		// Option 1: Check cart count increment
-		String message = cartMessage.getText().trim();
-
-		if (message.contains("added to your cart")) {
-			return true;
-		}
-
-		return false;
-	}
-
-	public void removeFromCart() {
-		viewCartButton.click();
-		WaitHelper.staticWait(2); // Wait for the cart to update
-		removeFromCartButton.click();
-
-	}
-
-	public String isProductRemovedFromCart() {
-		WaitHelper.staticWait(2); // Wait for the cart to update
-
-		String emptyMessage = emptyCartMessage.getText();
-		return emptyMessage;
-	}
-
-	public void applyPriceFilter(String minPrice, String maxPrice) {
-		minPriceInput.clear();
-		minPriceInput.sendKeys(minPrice);
-
-		maxPriceInput.clear();
-		maxPriceInput.sendKeys(maxPrice);
-
-		goButton.click();
-
-		WaitHelper.staticWait(2);
-
-	}
-
-	public boolean verifyPricesInRange(double minPrice, double maxPrice) {
-
-		List<Double> prices = getProductPrices();
-		for (Double price : prices) {
-			if (price < minPrice || price > maxPrice) {
-				return false; // Return false if any price is out of range
-			}
-		}
-		return true;
-	}
-
-	public void applyBrandFilter(String brandName) {
-
-		productBrandSearch.click();
-		WaitHelper.staticWait(3);
-		productBrandSearchInput.sendKeys(brandName);
-		WebElement brandFilterCheckbox = driver.findElement(By.xpath("//label[@for='Brand-" + brandName + "']"));
-		WaitHelper.staticWait(2);
-		brandFilterCheckbox.click();
-		
-		brandFilterApplyButton.click();
-
-	}
-
-	public boolean verifyProductsFromBrand(String brandName) {
-		
-		String brandValue = driver.findElement(By.xpath("//a[@data-key='Brand|Brand']")).getText();
-		
-		if(!(brandValue.equalsIgnoreCase(brandName))) {
-			return false;
-		}
-		
-		return true; // All products are from the selected brand
-	}
-
+    // Verify if all products are from the specified brand
+    public boolean verifyProductsFromBrand(String brandName) {
+        String brandValue = driver.findElement(By.xpath("//a[@data-key='Brand|Brand']")).getText();
+        return brandValue.equalsIgnoreCase(brandName);
+    }
 }

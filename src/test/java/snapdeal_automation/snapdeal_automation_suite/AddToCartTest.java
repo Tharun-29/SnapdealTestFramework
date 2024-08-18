@@ -11,28 +11,28 @@ import annotations.TestDescription;
 
 public class AddToCartTest extends BaseTest {
 
-	@Test
-	@TestDescription("TC 6 - Product Add To Cart Test")
-	public void verifyAddToCartFunctionality() {
-		String product = configReader.getProperty("product");
+    @Test
+    @TestDescription("TC 6 - Product Add To Cart Test")
+    public void verifyAddToCartFunctionality() {
+        // Step 1: Retrieve the product name from the configuration file
+        String product = configReader.getProperty("product");
 
-		/// Step 1: Perform the search operation
-		ProductPage productPage = landingPage.searchProducts(product);
+        // Step 2: Perform the search operation for the specified product
+        ProductPage productPage = landingPage.searchProducts(product);
 
-		// Step 2: Click on the first product to open its details in a new window
+        // Step 3: Locate the first product from the search results
+        WebElement firstProduct = landingPage.getFirstProduct();
 
-		WebElement firstProduct = landingPage.getFirstProduct();
-		firstProduct.click();
+        // Step 4: Click on the first product to open its details in a new window
+        firstProduct.click();
 
-		// Step 2: Switch to the new window
-		WindowSwitcher.switchToNewWindow(driver);
+        // Step 5: Switch to the newly opened window displaying the product details
+        WindowSwitcher.switchToNewWindow(driver);
 
-		// Step 4: Add the product to the cart in the new window
-		productPage.addToCart();
+        // Step 6: Add the product to the cart in the new window
+        productPage.addToCart();
 
-		// Step 5: Verify that the product was added to the cart
-		Assert.assertTrue(productPage.isProductAddedToCart(), "The product was not added to the cart.");
-
-	}
-
+        // Step 7: Verify that the product has been successfully added to the cart
+        Assert.assertTrue(productPage.isProductAddedToCart(), "The product was not added to the cart.");
+    }
 }

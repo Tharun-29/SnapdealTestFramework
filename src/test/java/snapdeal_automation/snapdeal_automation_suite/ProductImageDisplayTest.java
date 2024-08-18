@@ -9,22 +9,22 @@ import annotations.TestDescription;
 
 public class ProductImageDisplayTest extends BaseTest {
 
-	@Test
-	@TestDescription("TC 5 - Product Image Display Test")
-	public void verifyProductImage() {
+    @Test
+    @TestDescription("TC 5 - Product Image Display Test")
+    public void verifyProductImage() {
 
-		// Get the product name from the config file
-		String product = configReader.getProperty("product");
+        // Step 1: Retrieve the product name from the configuration file
+        String product = configReader.getProperty("product");
 
-		// Perform the search operation
-		ProductPage productPage = landingPage.searchProducts(product);
+        // Step 2: Perform the search operation for the specified product
+        ProductPage productPage = landingPage.searchProducts(product);
 
-		// Verify product images
-		boolean areImagesDisplayed = productPage.validateAllProductImagesDisplayed();
-		System.out.println(areImagesDisplayed);
+        // Step 3: Validate that all product images are displayed in the search results
+        boolean areImagesDisplayed = productPage.validateAllProductImagesDisplayed();
+        System.out.println(areImagesDisplayed); // Logging the result for debugging
 
-		// Assertion to be added here to verify product images
-		Assert.assertTrue(areImagesDisplayed, "Some " + product + " images in the search results.");
-	}
+        // Step 4: Assert that all product images are displayed, providing a clear error message if not
+        Assert.assertTrue(areImagesDisplayed, "Some " + product + " images are missing in the search results.");
+    }
 
 }

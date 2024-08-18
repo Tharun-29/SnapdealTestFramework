@@ -20,73 +20,66 @@ import utilities.ConfigReader;
 
 public class BaseTest {
 
-	public WebDriver driver;
-	public ConfigReader configReader;
-	public LandingPage landingPage;
+    public WebDriver driver;
+    public ConfigReader configReader;
+    public LandingPage landingPage;
 
-	// Constructor to initialize configReader
-	public BaseTest() {
-		configReader = new ConfigReader();
-	}
+    // Initialize ConfigReader
+    public BaseTest() {
+        configReader = new ConfigReader();
+    }
 
-	public WebDriver initializeDriver() {
+    // Set up WebDriver based on the browser configuration
+    public WebDriver initializeDriver() {
+        String browser = configReader.getProperty("browser");
 
-		String browser = configReader.getProperty("browser");
+        if (browser.contains("chrome")) {
+            ChromeOptions opt = new ChromeOptions();
+            WebDriverManager.chromedriver().setup();
+            opt.addArguments("start-maximized", "incognito");
+            opt.setAcceptInsecureCerts(true);
+            if (browser.contains("headless")) {
+                opt.addArguments("headless");
+            }
+            driver = new ChromeDriver(opt);
+        } else if (browser.contains("firefox")) {
+            WebDriverManager.firefoxdriver().setup();
+            driver = new FirefoxDriver();
+        }
 
-		if (browser.contains("chrome")) {
-			ChromeOptions opt = new ChromeOptions();
-			WebDriverManager.chromedriver().setup();
-			opt.addArguments("start-maximized");
-			opt.setAcceptInsecureCerts(true);
-			opt.addArguments("incognito");
+        int implicitWait = Integer.parseInt(configReader.getProperty("implicitWait"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWait));
 
-			// Check if headless mode is enabled
-			if (browser.contains("headless")) {
-				opt.addArguments("headless"); // Run Chrome in headless mode (no GUI)
-				WebDriverManager.chromedriver().setup();
-			}
+        return driver;
+    }
 
-			driver = new ChromeDriver(opt);
-		} else if (browser.contains("firefox")) {
-			WebDriverManager.firefoxdriver().setup();
-			driver = new FirefoxDriver();
-		}
+    // Set up method to initialize WebDriver and open the application
+    @BeforeMethod(alwaysRun = true)
+    public LandingPage setup() {
+        driver = initializeDriver();
+        String applicationUrl = configReader.getProperty("baseURL");
 
-		int implicitWait = Integer.parseInt(configReader.getProperty("implicitWait"));
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWait));
+        landingPage = new LandingPage(driver);
+        landingPage.launchApplication(applicationUrl);
 
-		return driver;
+        return landingPage;
+    }
 
-	}
+    // Clean up method to quit the WebDriver
+    @AfterMethod
+    public void tearDown() throws InterruptedException {
+        Thread.sleep(3000); // Delay for visibility
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 
-	@BeforeMethod(alwaysRun = true)
-	public LandingPage setup() {
-		driver = initializeDriver();
-		String applicationUrl = configReader.getProperty("baseURL");
-
-		landingPage = new LandingPage(driver);
-		landingPage.launchApplication(applicationUrl);
-
-		return landingPage;
-
-	}
-
-	// Method executed after each test method to tear down and quit the WebDriver
-	@AfterMethod
-	public void tearDown() throws InterruptedException {
-		Thread.sleep(5000);
-		if (driver != null) {
-			driver.quit();
-		}
-	}
-
-	// Method to capture screenshot and save it
-		public String getScreenShot(String TestCaseName, WebDriver driver) throws IOException {
-			TakesScreenshot ts = (TakesScreenshot) driver; // Cast WebDriver to TakesScreenshot
-			File src = ts.getScreenshotAs(OutputType.FILE); // Capture screenshot as FILE
-			File dest = new File(System.getProperty("user.dir") + "//reports//" + TestCaseName + ".png");
-			FileUtils.copyFile(src, dest); // Copy screenshot to destination
-			return System.getProperty("user.dir") + "//reports//" + TestCaseName + ".png"; // Return screenshot path
-		}
-
+    // Capture and save a screenshot
+    public String getScreenShot(String testCaseName, WebDriver driver) throws IOException {
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        File src = ts.getScreenshotAs(OutputType.FILE);
+        File dest = new File(System.getProperty("user.dir") + "//reports//" + testCaseName + ".png");
+        FileUtils.copyFile(src, dest);
+        return dest.getPath();
+    }
 }
